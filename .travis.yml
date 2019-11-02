@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+ - "stable"
+env:
+  global:
+    - CC_TEST_REPORTER_ID=9e4212a6abf0850314b035a5d4d8a57331958bccd9ff80d62624f16a2bf96bea
+
+install: 
+  - npm install
+
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script: npm test
+after_success:
+  - npm run coverage
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+deploy:
+  provider: heroku
+  api_key:  607bdb1f-8b1c-4170-bd1f-e3b02ec11e7c
+  app:
+    master: awamoapp
+    

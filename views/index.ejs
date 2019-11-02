@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Savics Dev App</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+	<link href="../css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+	<div class="container-fluid">
+		<div class="row content">
+			<div class="col-sm-3 sidenav">
+			</div>
+
+			<div class="col-sm-9">
+					<h3>New Medical Record</h3>
+					<form role="form" id="medicalForm">
+						<div class="form-group">
+							<label for="number1">First Name:</label>
+							<input type="text" id="fname" class="form-control" placeholder="fname">
+						</div>
+	
+						<div class="form-group">
+							<label for="number1">Last Name:</label>
+							<input type="text" id="lname" class="form-control" placeholder="lname">
+						</div>
+
+						<div class="form-group">
+								<label for="number1">Age:</label>
+								<input type="text" id="age" class="form-control" placeholder="age">
+							</div>
+
+							<div class="form-group">
+									<label for="male">Male:</label>
+									<input type="radio" name="gender" id="gender" value ="male" aria-label="Radio button for following text input">	
+									<label for="female">Female:</label>
+									<input type="radio" name="gender" id="gender" value ="female" aria-label="Radio button for following text input">	
+
+								</div>							
+					
+						<div class="form-group">
+							<label for="sel1">City:</label>
+							<select class="form-control" id="city">
+								<option value="Paris">Paris</option>
+								<option value="Alger">Alger</option>
+								<option value="Brussels">Brussels</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+								<label for="sel1">Country:</label>
+								<select class="form-control" id="country">
+									<option value="France">France</option>
+									<option value="Algeria">Algeria</option>
+									<option value="Belgium">Belgium</option>
+								</select>
+							</div>
+
+                        <div class="form-group">
+							<label>Living with Diabetes?</label>
+									<label for="yes">Yes:</label>
+									<input type="radio" name="diabetesCheck" id="diabetesCheck" value ="yes" aria-label="Radio button for following text input">	
+									<label for="no">No:</label>
+									<input type="radio" name="diabetesCheck" id="diabetesCheck" value ="no" aria-label="Radio button for following text input">	
+									<label for="unknown">Unknown:</label>
+									<input type="radio" name="diabetesCheck" id="diabetesCheck" value ="unknown" aria-label="Radio button for following text input">	
+	
+								</div>							
+
+						<input type="button" class="add-row" value="Post">
+					</form>
+
+				
+				<h4><b>List of Medical Records</b></h4>
+				<div class="form-group">
+						<label for="number1">Only Minors:</label>
+						<input type="checkbox" name="minors_check" id="minors_check" aria-label="Radio button for following text input">	
+					</div>
+				<table class='table borderless' id="customerDetails" type="text">
+					<thead>
+						<tr>
+							<th>Fname</th>
+							<th>Lname</th>
+							<th>Age</th>
+							<th>Sex</th>
+							<th>Country</th>
+							<th>City</th>
+							<th>Diabetes Check</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<footer class="container-fluid">
+		<p>Footer Text</p>
+	</footer>
+	<script src="../js/mock-backend.js"></script>
+	<script src="../js/app.js"></script>
+
+</body>
+
+</html>
