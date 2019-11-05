@@ -2,44 +2,49 @@
 
 $(document).ready(function () {
   $('.add-row').click(function () {
-    var inputData = {};
+   
     var fname = $('#fname').val();
-    lname = $('#lname').val();
-    age = $('#age').val();
-    sex = $('input[name=gender]:checked', '#medicalForm').val();
-    city = $('#city').val();
-    country = $('#country').val();
-    diabetesCheck = $('input[name=diabetesCheck]:checked', '#medicalForm').val();
+        lname = $('#lname').val();
+        age = $('#age').val();
+        sex = $('input[name=gender]:checked', '#medicalForm').val();
+        city = $('#city').val();
+        country = $('#country').val();
+        diabetesCheck = $('input[name=diabetesCheck]:checked', '#medicalForm').val();
 
+  
+      var dataArray = [];
+        dataArray.push(fname,lname,age,sex,city,country,diabetesCheck)
 
     if (!/^[0-9]+$/.test(age) || age == '') {
-      alert("The age field can not be empty.Please enter the valid age.");
+     alert("The age field can not be empty.Please enter the valid age.");
+    }else{
     }
 
-    var markup = "<tr style='background-color:#ffe484;'><td>" + fname + '</td><td>' + lname + '</td><td>' + age + '</td><td>' + sex + '</td><td>' + country + '</td><td>' + city + '</td><td>' + diabetesCheck + '</td><td><span class="deletebtn">x</span></td></tr>';
-    $('table tbody').append(markup);
-    });// end main function
+     if (dataArray.length > 0) {
+      var markup = "<tr style='background-color:#ffe484;'><td>" + dataArray[0] + '</td><td>' + dataArray[1] + '</td><td>' + dataArray[2] + '</td><td>' + dataArray[3] + '</td><td>' + dataArray[4] + '</td><td>' + dataArray[5] + '</td><td>' + dataArray[6] + '</td><td><span class="deletebtn">x</span></td></tr>';
+      $('table tbody').append(markup);
+     }
 
-  $("#minors_check").click(function () {
-    table = document.getElementById("customerDetails");
-    tr = table.getElementsByTagName("tr");
-  
-    // Loop through all table rows, and hide those who don't match the search query
-    for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[0];
-      if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue > 18) {
-          //remove table row
-        }
-      }
-    }
-
-
+      //for-minors-check
+      $("#minors_check").on("click", function () {
+        var value = $(this).val().toLowerCase();
+        var ArrayTable = [];
+                $('#customerDetails td').each(function(){
+                    ArrayTable.push($(this).text()); 
+                });
+             
+            for (i=0;i<ArrayTable.length;++i){  
+              if(parseInt(ArrayTable[i]) < value){
+                $("#customerDetails tr").filter(function() {
+                  $(this).show()
+                })
+              }else{
+                $("#customerDetails tr").hide()
+              }
+            }
+         
+      });// end main function
+    });
   });
-  // Find and remove selected table rows
-  $(document).on('click', 'span.deletebtn', function () {
-    $(this).closest('tr').remove();
-    return false;
-  });
-});
+
+
