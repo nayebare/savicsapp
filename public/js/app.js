@@ -1,50 +1,47 @@
 /* Main app js file */
 
 $(document).ready(function () {
+  var dataArray = [];
+
   $('.add-row').click(function () {
-   
     var fname = $('#fname').val();
-        lname = $('#lname').val();
-        age = $('#age').val();
-        sex = $('input[name=gender]:checked', '#medicalForm').val();
-        city = $('#city').val();
-        country = $('#country').val();
-        diabetesCheck = $('input[name=diabetesCheck]:checked', '#medicalForm').val();
+    lname = $('#lname').val();
+    age = $('#age').val();
+    sex = $('input[name=gender]:checked', '#medicalForm').val();
+    city = $('#city').val();
+    country = $('#country').val();
+    diabetesCheck = $('input[name=diabetesCheck]:checked', '#medicalForm').val();
+    minors_check = $('#minors_check:checked').val();
 
-  
-      var dataArray = [];
-        dataArray.push(fname,lname,age,sex,city,country,diabetesCheck)
+    var myObject = {};
+    myObject.fname = fname;
+    myObject.lname = lname;
+    myObject.age = age;
+    myObject.sex = sex;
+    myObject.city = city;
+    myObject.country = country;
+    myObject.diabetesCheck = diabetesCheck;
 
-    if (!/^[0-9]+$/.test(age) || age == '') {
-     alert("The age field can not be empty.Please enter the valid age.");
-    }else{
-    }
+    dataArray.push(myObject)
 
-     if (dataArray.length > 0) {
-      var markup = "<tr style='background-color:#ffe484;'><td>" + dataArray[0] + '</td><td>' + dataArray[1] + '</td><td>' + dataArray[2] + '</td><td>' + dataArray[3] + '</td><td>' + dataArray[4] + '</td><td>' + dataArray[5] + '</td><td>' + dataArray[6] + '</td><td><span class="deletebtn">x</span></td></tr>';
+    if (dataArray.length > 0) {
+      for (i = 0; i < dataArray.length; i++) {
+        var markup = "<tr style='background-color:#ffe484;'><td>" + dataArray[i].fname + '</td><td>' + dataArray[i].lname + '</td><td>' + dataArray[i].age + '</td><td>' + dataArray[i].sex + '</td><td>' + dataArray[i].city + '</td><td>' + dataArray[i].country + '</td><td>' + dataArray[i].diabetesCheck + '</td></tr>';
+      }
       $('table tbody').append(markup);
-     }
 
-      //for-minors-check
+      //minors check
       $("#minors_check").on("click", function () {
-        var value = $(this).val().toLowerCase();
-        var ArrayTable = [];
-                $('#customerDetails td').each(function(){
-                    ArrayTable.push($(this).text()); 
-                });
-             
-            for (i=0;i<ArrayTable.length;++i){  
-              if(parseInt(ArrayTable[i]) < value){
-                $("#customerDetails tr").filter(function() {
-                  $(this).show()
-                })
-              }else{
-                $("#customerDetails tr").hide()
-              }
-            }
-         
-      });// end main function
-    });
+        $("#customerDetails tr").remove()
+        for (i = 0; i < dataArray.length; i++) {
+          if (dataArray[i].age < 18) {
+            var markup = "<tr style='background-color:##A9A9A9;'><td>" + dataArray[i].fname + '</td><td>' + dataArray[i].lname + '</td><td>' + dataArray[i].age + '</td><td>' + dataArray[i].sex + '</td><td>' + dataArray[i].city + '</td><td>' + dataArray[i].country + '</td><td>' + dataArray[i].diabetesCheck + '</td></tr>';
+          }
+          $('table tbody').append(markup);
+        }
+      });
+    }
   });
+});
 
 
