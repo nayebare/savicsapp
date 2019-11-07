@@ -1,4 +1,4 @@
-/* Main app js file */
+/* Main app js file code optimization is the  next step */
 
 $(document).ready(function () {
   var dataArray = [];
