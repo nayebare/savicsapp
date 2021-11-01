@@ -1,5 +1,4 @@
 // routes file for the api.. all routes are defined here
-
 const thisApp = require('./app.js');
 var jwt = require('jsonwebtoken');
 //var jwt = require('express-jwt');

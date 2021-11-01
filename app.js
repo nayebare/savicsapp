@@ -5,7 +5,8 @@ var logger = require('morgan')
 var bodyParser = require('body-parser')
 var app = express()
 var routes = require('./routes.js');
-const port = parseInt(process.env.PORT, 10) || 8000;
+var cors = require('cors')
+const port = parseInt(4000);
 const http = require('http');
 var swaggerUi = require('swagger-ui-express');
     swaggerDocument = require('./swagger.json');
@@ -37,6 +38,7 @@ Setting ejs as the base template
 */
 app.set('view engine', 'ejs');
 app.use('/', routes);
+app.use(cors())
 
 /*
 Setting the static folder
@@ -44,9 +46,9 @@ Setting the static folder
 
 app.use(express.static('public'));
 
-app.set('port', port);
+app.set('port', 4040);
 const server = http.createServer(app);
-server.listen(port);
+server.listen(4040);
 
 module.export = app;
 

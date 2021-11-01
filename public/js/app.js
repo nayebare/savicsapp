@@ -3,57 +3,73 @@
 $(document).ready(function () {
   var dataArray = [];
   $('.add-row').click(function () {
-    var fname = $('#fname').val();
-    lname = $('#lname').val();
-    age = $('#age').val();
-    sex = $('input[name=gender]:checked', '#medicalForm').val();
-    city = $('#city').val();
-    country = $('#country').val();
-    diabetesCheck = $('input[name=diabetesCheck]:checked', '#medicalForm').val();
+    var
+    email = $('#email').val();
+    country_incorporation = $('#country_incorporation').val(),
+    shares_purchased = $('#shares_purchased').val(),
+    type__shares_= $('#type__shares_').val(),
+    price_pershare = $('#price_pershare').val(),
+    grace_period = $('#grace_period').val(),
+    percentage_payments = $('#percentage_payments').val(),
+    repurchases = $('#repurchases').val(),
+    exit_multiple = $('#exit_multiple').val(),
+    first_refusal_partcicipation = $('#first_refusal_partcicipation').val(),
+    sale_materialtransaction = $('#sale_materialtransaction').val(),
+    consent_materialtransaction = $('#consent_materialtransaction').val(),
+    what_consents_and_approvals_are_needed_to_issue_this_shield_ = $('#what_consents_and_approvals_are_needed_to_issue_this_shield_').val();
+    what_date_are_you_issuing_this_investment_agreement_ = $('#what_date_are_you_issuing_this_investment_agreement_').val();
+    what_is_the_investment_amount_ = $('#what_is_the_investment_amount_').val();
+    what_is_the_investor_s_name_ = $('#what_is_the_investor_s_name_').val();
+    what_valuation_cap_will_this_shield_be_converting_ = $('#what_valuation_cap_will_this_shield_be_converting_').val();
+    which_company_is_receiving_the_investment_ = $('#which_company_is_receiving_the_investment_').val();
 
+  
 
-    var compare = /[0-9]{10}/;
-    if (age.match(compare)) {
-
-
-      var myObject = {};
-      myObject.fname = fname;
-      myObject.lname = lname;
-      myObject.age = age;
-      myObject.sex = sex;
-      myObject.city = city;
-      myObject.country = country;
-      myObject.diabetesCheck = diabetesCheck;
-
-      dataArray.push(myObject)
-      localStorage.setItem("tempData", JSON.stringify(dataArray));
-
-      if (dataArray.length > 0) {
-        for (i = 0; i < dataArray.length; i++) {
-          var markup = "<tr style='background-color:#ffe484;'><td>" + dataArray[i].fname + '</td><td>' + dataArray[i].lname + '</td><td>' + dataArray[i].age + '</td><td>' + dataArray[i].sex + '</td><td>' + dataArray[i].city + '</td><td>' + dataArray[i].country + '</td><td>' + dataArray[i].diabetesCheck + '</td></tr>';
-        }
-        $('table tbody').append(markup);
-      }
-    } else {
-      alert("The age must be a number")
+    var myObject = {
+    "email": email,
+    "country_incorporation": country_incorporation,
+    "shares_purchased": shares_purchased,
+    "type__shares_": type__shares_,
+    "price_pershare": price_pershare,
+    "grace_period": grace_period,
+    "percentage_payments": percentage_payments,
+    "repurchases": repurchases,
+    "exit_multiple": exit_multiple,
+    "first_refusal_partcicipation": first_refusal_partcicipation,
+    "sale_materialtransaction": sale_materialtransaction,
+    "consent_materialtransaction": consent_materialtransaction,
+    "which_company_is_receiving_the_investment_": which_company_is_receiving_the_investment_,
+    "what_consents_and_approvals_are_needed_to_issue_this_shield_": what_consents_and_approvals_are_needed_to_issue_this_shield_,
+    "what_date_are_you_issuing_this_investment_agreement_": what_date_are_you_issuing_this_investment_agreement_,
+    "what_is_the_investment_amount_": what_is_the_investment_amount_,
+    "what_is_the_investor_s_name_": what_is_the_investor_s_name_,
+    "what_valuation_cap_will_this_shield_be_converting_":  what_valuation_cap_will_this_shield_be_converting_
     }
+
+    const myHeaders = new Headers({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin':'*',
+      'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoibGF1bmNoYmFzZWFwaSIsInBhc3N3b3JkIjoicEAhaVZ2Zk5nM3BUUmg0dHMifSwiaWF0IjoxNjM0MzE4Njc3LCJleHAiOjE2NDIwOTQ2Nzd9.B13f2dAtLueL7QLb1lpFOfgu0fZ74_YhPCMAPcfHVzY'
   });
 
-
-  //minors check
-  $("#minors_check").on("click", function () {
-    $('table tbody').empty();
-    var localStorageData = JSON.parse((localStorage.getItem("tempData")));
-    for (i = 0; i < localStorageData.length; i++) {
-      if (localStorageData[i].age < 18) {
-        var markup = "<tr style='background-color:##A9A9A9;'><td>" + localStorageData[i].fname + '</td><td>' + localStorageData[i].lname + '</td><td>' + localStorageData[i].age + '</td><td>' + localStorageData[i].sex + '</td><td>' + localStorageData[i].city + '</td><td>' + localStorageData[i].country + '</td><td>' + localStorageData[i].diabetesCheck + '</td></tr>';
-        $('table tbody').append(markup);
-      }
-
-    }
-
+    fetch('http://localhost:8000/api/scrld/generate/doc/rbera', {
+      method: 'POST', 
+      headers: myHeaders,
+      body: JSON.stringify(myObject)
+    })
+    .then(response => response.blob())
+    .then(function(myBlob) {
+      var objectURL = webkitURL.createObjectURL(myBlob);
+      // window.location.href = objectURL;
+      // download(myBlob)
+      // https://stackoverflow.com/questions/32545632/how-can-i-download-a-file-using-window-fetch
+      var file = window.URL.createObjectURL(myBlob);
+      window.location.assign(file)
+    })
+      .catch((error) => {
+        console.error({'Error': error});
+      });
   });
 
 });
-
 
