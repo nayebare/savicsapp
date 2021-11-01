@@ -61,7 +61,8 @@ $(document).ready(function () {
       // .then(response => response.blob())
       .then(function(data) {
         console.log(data)
-        // var objectURL = webkitURL.createObjectURL(myBlob);
+        // var objectURL = webkitURL.createObjectURL(myBlob);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
+        
         // // window.location.href = objectURL;
         // // download(myBlob)
         // // https://stackoverflow.com/questions/32545632/how-can-i-download-a-file-using-window-fetch
